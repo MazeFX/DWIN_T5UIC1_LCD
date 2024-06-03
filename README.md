@@ -1,5 +1,57 @@
 # DWIN_T5UIC1_LCD
 
+
+The first thing to do is to go in to you moonraker.conf file and find the line that starts with:
+
+klippy_uds_address:
+Edit that to look like this:
+
+klippy_uds_address: /home/pi/printer_data/comms/klippy.sock
+Just save and exit after that.
+
+The second thing you need to do is open up putty and ssh in to you klipper server. when using Fluid or Mainsail uou need to go into the klipper.service file to enable the Klipper API Socket. You can do this by writing this:
+
+sudo nano /etc/systemd/system/klipper.service
+If the file has this line:
+
+KLIPPY_ARGS="/home/pi/klipper/klippy/klippy.py /home/pi/printer.cfg -l /tmp/klippy.log"
+Replace that with this line instead if it dosent just paste this in:
+
+KLIPPER_ARGS="/home/pi/klipper/klippy/klippy.py /home/pi/printer_data/config/printer.cfg -I /home/pi/printer_data/comms/klippy.serial -l /home/pi/printer_data/logs/klippy.log -a /home/pi/printer_data/comms/klippy.sock"
+After that you can follow this tutorial DWIN_T5UIC1_LCD untill you get to the Run The Code after that get back here and continue from here.
+
+Make sure you have the screen in the right oration hade mine upside down the first time. It should power upp with the creality logo on it if done right.
+
+Now you will need to edit some files. First write:
+
+cd  DWIN_T5UIC1_LCD 
+Now you should be in the right file directory so start with typing this:
+
+sudo nano  printerInterface.py
+Go down to line 256 and edit that to look like this:
+
+Note if unsure what line you are on use CTRL + C it will show you what line you are on
+
+self.ks = KlippySocket('/home/pi/printer_data/comms/klippy.sock', callback=self.klippy_callback)
+Now you should save and exit and run this command:
+
+sudo nano simpleLCD.service
+In there under [Service] you should add this line:
+
+Restart=always
+Save and exit.
+
+If you have a TJC you will need to flash cutom firmware that can be found here  https://github.com/mriscoc/Ender3V2S1/wiki/How-to-update-the-display. You can also follow that guide if you are unsure what screen you have and how to flash it.
+
+Now if you have done every step go back to the DWIN_T5UIC1_LCD and continue the tutorial where you left of untill the end. Now you should have the V2 LCD upp and running with Klipper.
+
+The screen is very finicky and sometimes stops working with firmware restart.
+
+Edit: If tou find any spelling errors i am sorry english is not my native language and i am also dyslexic. But hope somebody find this useful.
+
+
+
+
 ## Python class for the Ender 3 V2 LCD runing klipper3d with Moonraker 
 
 https://www.klipper3d.org
