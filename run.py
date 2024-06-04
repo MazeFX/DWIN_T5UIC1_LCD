@@ -3,7 +3,7 @@ from dwinlcd import DWIN_LCD
 
 encoder_Pins = (26, 19)
 button_Pin = 13
-LCD_COM_Port = '/dev/serial0'
+LCD_COM_Port = '/dev/ttyUSB'
 API_Key = 'XXXXXX'
 
 DWINLCD = DWIN_LCD(

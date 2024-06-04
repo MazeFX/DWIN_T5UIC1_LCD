@@ -1,5 +1,11 @@
 # DWIN_T5UIC1_LCD
 
+https://github.com/RobRobM/DWIN_T5UIC1_LCD_E3S1
+
+To get your API key run:
+
+~/moonraker/scripts/fetch-apikey.sh
+
 
 The first thing to do is to go in to you moonraker.conf file and find the line that starts with:
 
